@@ -1,16 +1,15 @@
-import { ObjectId } from "mongodb";
 import { getUsersCollection } from "../db/mongodb.js";
 import bcript from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const registr = async (req, res) => {
   try {
-    const { email, password ,role } = req.body;
+    const { email, password, role } = req.body;
     if (!email || !password) {
       return res.status(401).json("email or password is not defind");
     }
 
-    const user = getUsersCollection();
+    const users = getUsersCollection();
 
     const hashpassword = await bcript.hash(password, 12);
 
@@ -18,18 +17,51 @@ export const registr = async (req, res) => {
       email,
       hashpassword,
       Date: new Date(),
-      role: role?role: "user",
+      role: role ? role : "user",
     };
     const token = jwt.sign(
-      { id: user.id, role: user.role },
+      { id: users.id, role: users.role },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" },
     );
 
-    await user.insertOne(objuser);
+    await users.insertOne(objuser);
 
     res.status(200).json({ email: objuser.email, token: token });
   } catch (error) {
-    return res.status(500).json({ error:error.message  });
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(401).json("email or password is not defind");
+    }
+    const users = await getUsersCollection();
+
+    const user = await users.findOne({ email });
+    if (!user) {
+      return res.status(401).json("email is not defind");
+    }
+    console.log(user);
+    
+    const comper = await bcript.compare(password, user.hashpassword);
+    console.log(comper);
+    
+    if (!comper) {
+      return res.status(401).json("password is not good try again");
+    }
+
+    const token = jwt.sign(
+      { id: user._id, role: "user" },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" },
+    );
+
+    res.status(200).json({ email , token: token });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 };
