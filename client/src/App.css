@@ -22,12 +22,17 @@
 .divlinks{
   display: flex;
 }
-.buten  {
-  width: 20rem ;
-  border: 2px solid;
+.buten a {
+  display: block;
+  width: 176px;
+  border: 2px solid black;
   border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  padding: 10px;
 }
 
-.buten:hover  {
+.buten a.active {
   background-color: greenyellow;
 }
