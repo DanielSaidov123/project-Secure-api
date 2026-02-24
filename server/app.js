@@ -3,6 +3,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import { connectDB } from "./db/mongodb.js"
 import users from "./routes/users.routes.js"
+import notes from "./routes/note.routes.js"
 dotenv.config()
 
 const app = express()
@@ -17,6 +18,8 @@ app.get('/' , (req , res )=>{
 })
 
 app.use("/users" , users)
+app.use("/notes" , notes)
+
 const PORT = process.env.port
 
 app.listen(PORT , ()=>{

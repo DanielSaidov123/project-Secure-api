@@ -8,9 +8,8 @@ export const registr = async (req, res) => {
     if (!email || !password) {
       return res.status(401).json("email or password is not defind");
     }
-
     const users = getUsersCollection();
-
+    
     const hashpassword = await bcript.hash(password, 12);
 
     const objuser = {
@@ -19,13 +18,15 @@ export const registr = async (req, res) => {
       Date: new Date(),
       role: role ? role : "user",
     };
+     await users.insertOne(objuser);
+    const u = await users.findOne({email})
     const token = jwt.sign(
-      { id: users.id, role: users.role },
+      { id: u._id, role: u.role },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" },
     );
 
-    await users.insertOne(objuser);
+   
 
     res.status(200).json({ email: objuser.email, token: token });
   } catch (error) {
@@ -39,7 +40,7 @@ export const login = async (req, res) => {
     if (!email || !password) {
       return res.status(401).json("email or password is not defind");
     }
-    const users = await getUsersCollection();
+    const users = getUsersCollection();
 
     const user = await users.findOne({ email });
     if (!user) {
