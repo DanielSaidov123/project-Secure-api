@@ -1,5 +1,25 @@
-.nav{
+.nav {
   display: flex;
   justify-content: center;
   background-color: #adadad;
+}
+
+.formRegister {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  padding: 3rem;
+}
+
+.divform {
+   width: 400px;
+    text-align: center;
+    margin-top: 3rem;
+    margin-left: 40%;
+  }
+
+.buten button{
+  width: 200px;
+  padding: 1rem;
+  
 }
