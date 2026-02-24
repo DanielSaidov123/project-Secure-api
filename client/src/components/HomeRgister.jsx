@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { registerApi } from "../api/fatch.js";
-import {   NavLink } from "react-router";
+import { NavLink } from "react-router";
 export const HomeRgister = () => {
   const [inputEmail, setInputEmaile] = useState("");
   const [inputPasswors, setInputPassword] = useState("");
@@ -22,7 +22,10 @@ export const HomeRgister = () => {
         password: inputPasswors,
       };
       const token = await registerApi(regi);
-      localStorage.setItem("token", token.data.token);
+
+      if (token.data.token) {
+        localStorage.setItem("token", token.data.token);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -32,15 +35,10 @@ export const HomeRgister = () => {
     <div className="divform">
       <div className="divlinks">
         <div className="buten">
-      
-          <NavLink to="/login" >
-            login
-          </NavLink>
+          <NavLink to="/login">login</NavLink>
         </div>
         <div className="buten">
-          <NavLink to="/" >
-            register
-          </NavLink>
+          <NavLink to="/">register</NavLink>
         </div>
       </div>
       <form className="formRegister" onSubmit={onsubmit}>
