@@ -45,10 +45,8 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(401).json("email is not defind");
     }
-    console.log(user);
     
     const comper = await bcript.compare(password, user.hashpassword);
-    console.log(comper);
     
     if (!comper) {
       return res.status(401).json("password is not good try again");
