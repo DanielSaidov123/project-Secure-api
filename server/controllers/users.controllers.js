@@ -40,7 +40,7 @@ export const login = async (req, res) => {
     if (!email || !password) {
       return res.status(401).json("email or password is not defind");
     }
-    const users = getUsersCollection();
+    const users = await getUsersCollection();
 
     const user = await users.findOne({ email });
     if (!user) {

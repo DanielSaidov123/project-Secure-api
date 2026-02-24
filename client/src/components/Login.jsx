@@ -1,7 +1,8 @@
+import { loginApi } from "../api/fatch.js";
 import { useState } from "react";
-import { registerApi } from "../api/fatch.js";
-import {   NavLink } from "react-router";
-export const HomeRgister = () => {
+import { Link, NavLink } from "react-router";
+
+export const Login = () => {
   const [inputEmail, setInputEmaile] = useState("");
   const [inputPasswors, setInputPassword] = useState("");
 
@@ -21,7 +22,7 @@ export const HomeRgister = () => {
         email: inputEmail,
         password: inputPasswors,
       };
-      const token = await registerApi(regi);
+      const token = await loginApi(regi);
       localStorage.setItem("token", token.data.token);
     } catch (error) {
       console.log(error);

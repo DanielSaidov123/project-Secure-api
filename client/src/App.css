@@ -9,6 +9,8 @@
   flex-direction: column;
   border: 2px solid;
   padding: 3rem;
+  border-radius: 5px;
+
 }
 
 .divform {
@@ -17,9 +19,15 @@
     margin-top: 3rem;
     margin-left: 40%;
   }
+.divlinks{
+  display: flex;
+}
+.buten  {
+  width: 20rem ;
+  border: 2px solid;
+  border-radius: 5px;
+}
 
-.buten button{
-  width: 200px;
-  padding: 1rem;
-  
+.buten:hover  {
+  background-color: greenyellow;
 }

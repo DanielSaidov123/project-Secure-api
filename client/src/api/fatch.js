@@ -6,6 +6,7 @@ const api = axios.create({
 
 export const registerApi = (data) => api.post("/users/registr", data);
 
-// const s = await registerApi({ email: "dsadsa", password: "12345678" });
+export const loginApi = (data) => api.post("/users/login", data);
 
-
+const s = await loginApi({ email: "dsadsa", password: "12345678" });
+console.log()
