@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { registerApi } from "../api/fatch.js";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 export const HomeRgister = () => {
   const [inputEmail, setInputEmaile] = useState("");
   const [inputPasswors, setInputPassword] = useState("");
-
+ const navigate = useNavigate();
   function onchengeEmaile(e) {
     e.preventDefault();
     setInputEmaile(e.target.value);
@@ -23,8 +23,12 @@ export const HomeRgister = () => {
       };
       const token = await registerApi(regi);
 
-      if (token.data.token) {
-        localStorage.setItem("token", token.data.token);
+      localStorage.setItem("token", token.data.token);
+
+      if (token.status >= 200 && token.status < 300) {
+        navigate("/notes");
+      } else {
+         alert("התחברות נכשלה נסה שוב")
       }
     } catch (error) {
       console.log(error);

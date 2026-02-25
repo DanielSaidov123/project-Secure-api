@@ -2,8 +2,8 @@ import { getNoteColection } from "../db/mongodb.js";
 
 export const createNote = async (req, res) => {
   try {
-    const { title, content} = req.body;
-    if (!title || !content ) {
+    const { title, content } = req.body;
+    if (!title || !content) {
       return res.status(401).json("you not enter title or contect or userID");
     }
 
@@ -11,12 +11,23 @@ export const createNote = async (req, res) => {
     const newNote = {
       title,
       content,
-      IDuser:req.user.idUser,
+      IDuser: req.user.idUser,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
     await notes.insertOne(newNote);
     res.status(200).json({ newNote });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const getMyNote = async (req, res) => {
+  try {
+    const IDuser = req.user.idUser
+     const notes = getNoteColection();
+    const ListNote = await notes.find({ IDuser: IDuser }).toArray();
+     res.status(200).json(ListNote); 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

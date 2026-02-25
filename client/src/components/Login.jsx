@@ -1,11 +1,11 @@
 import { loginApi } from "../api/fatch.js";
 import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 
 export const Login = () => {
   const [inputEmail, setInputEmaile] = useState("");
   const [inputPasswors, setInputPassword] = useState("");
-
+  const navigate = useNavigate()
   function onchengeEmaile(e) {
     e.preventDefault();
     setInputEmaile(e.target.value);
@@ -25,6 +25,11 @@ export const Login = () => {
       const token = await loginApi(regi);
       if (token.data.token) {
         localStorage.setItem("token", token.data.token);
+      }
+      if (token.status >= 200 && token.status < 300) {
+        navigate("/notes");
+      } else {
+         alert("התחברות נכשלה נסה שוב")
       }
     } catch (error) {
       console.log(error);
