@@ -23,7 +23,9 @@ export const Login = () => {
         password: inputPasswors,
       };
       const token = await loginApi(regi);
-      localStorage.setItem("token", token.data.token);
+      if (token.data.token) {
+        localStorage.setItem("token", token.data.token);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -33,15 +35,10 @@ export const Login = () => {
     <div className="divform">
       <div className="divlinks">
         <div className="buten">
-      
-          <NavLink to="/login" >
-            login
-          </NavLink>
+          <NavLink to="/login">login</NavLink>
         </div>
         <div className="buten">
-          <NavLink to="/" >
-            register
-          </NavLink>
+          <NavLink to="/">register</NavLink>
         </div>
       </div>
       <form className="formRegister" onSubmit={onsubmit}>
