@@ -36,3 +36,49 @@
 .buten a.active {
   background-color: greenyellow;
 }
+
+/* Container - השורה הראשית */
+.notes-container {
+  display: flex;
+  flex-wrap: wrap; /* יורד שורה כשאין מקום */
+  gap: 20px;       /* רווח בין הכרטיסים */
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Card - הפתק הבודד */
+.note-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 370px;    /* רוחב הכרטיס */
+  transition: transform 0.2s ease;
+  border: 1px solid #eaeaea;
+}
+
+.note-card:hover {
+  transform: translateY(-5px); /* אפקט ריחופ קטן */
+}
+
+.note-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.note-content {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.note-date {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #aaa;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}

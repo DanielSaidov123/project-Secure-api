@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router";
 import { createNotes } from "../api/fatch.js";
+import { MyNotes } from "./MyNotes.jsx";
 
 export const Notes = () => {
   const [inputTitle, setInputTitel] = useState("");
@@ -54,6 +55,8 @@ export const Notes = () => {
 
         <input type="submit" className="submit" />
       </form>
+      <MyNotes/>
+
     </div>
   );
 };

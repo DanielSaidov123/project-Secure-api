@@ -10,13 +10,19 @@ export const loginApi = (data) => api.post("/users/login", data);
 
 export const createNotes = (data, token) =>
   api.post("/notes/create", data, {
-    headers: {  
+    headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
 
-// const newNote = { title: "הערה חדשה", content: "תוכן ההערה" };
-// const token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWRiNDFhZjk2MTE0MDRiZjA5MDBkMyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzcyMDA0ODkyLCJleHAiOjE3NzIwMDg0OTJ9.hOOnxlS-3-h-0I0g6r6mi4fYQOeRh2pLPtRjBFaeOwU"
-// const result = await createNotes(newNote, token);
+export const grtMyNotes = (token) =>api.get("/notes/myNotes",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      },
+    },
+  );
+// const token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWQ4MGZlYmI2NmRhOTRmMWE2NmY1MSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzcyMDA4NjkxLCJleHAiOjE3NzIwMTIyOTF9.jpqT1BvCDnUNjc45JCGC1zY2zGhvujSfCYoiTWwxII8"
+// const result =   await grtMyNotes(token)
 // console.log(result)
