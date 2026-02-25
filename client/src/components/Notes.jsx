@@ -24,7 +24,11 @@ export const Notes = () => {
       };
       const localtoken = localStorage.getItem("token");
       const text = await createNotes(regi, localtoken);
-      console.log(text)
+      if (text.status >= 200 && text.status < 300) {
+        alert("ההודעה נשמרה בהצלחה!");
+      } else {
+        alert("משהו השתבש תנסה שוב");
+      }
     } catch (error) {
       console.log(error);
     }
